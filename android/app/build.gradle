@@ -50,6 +50,31 @@ android {
         versionName flutterVersionName
     }
 
+     // TODO: Remove when below fix is available in stable channel.
+    // https://github.com/flutter/flutter/pull/82309
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
+    flavorDimensions "default"
+    productFlavors { 
+        production {
+            dimension "default"
+            applicationIdSuffix ""
+            manifestPlaceholders = [appName: "Chicken Box Time"]
+        }
+        staging {
+            dimension "default"
+            applicationIdSuffix ".stg"
+            manifestPlaceholders = [appName: "[STG] Chicken Box Time"]
+        }        
+        development {
+            dimension "default"
+            applicationIdSuffix ".dev"
+            manifestPlaceholders = [appName: "[DEV] Chicken Box Time"]
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
