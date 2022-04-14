@@ -4,13 +4,13 @@ extension FlavorExtension on String {
   Color getFlavorColor() {
     switch (this) {
       case 'development':
-        return Colors.yellow[800]!;
+        return const Color(0xFF3096F3);
       case 'staging':
-        return Colors.grey[600]!;
+        return const Color(0xFFF3993F);
       case 'production':
-        return Colors.green[600]!;
+        return const Color(0xFF6B45E8);
       default:
-        return Colors.blue[600]!;
+        return Colors.grey[600]!;
     }
   }
 
