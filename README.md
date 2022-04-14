@@ -2,7 +2,7 @@
 
 A new Flutter project.
 
-## Flavor's
+## Flavor's 🍨
 
 - [x] Android
 - [x] iOS
