@@ -1,3 +1,5 @@
+import 'package:chicken_box_time/flavor/constants.dart';
+
 enum Environment {
   development,
   staging,
@@ -30,14 +32,14 @@ class _Config {
   static const flavor = 'flavor';
 
   static Map<String, dynamic> development = {
-    flavor: 'development',
+    flavor: flavorDevelopment,
   };
 
   static Map<String, dynamic> staging = {
-    flavor: 'staging',
+    flavor: flavorStaging,
   };
 
   static Map<String, dynamic> production = {
-    flavor: 'production',
+    flavor: flavorProduction,
   };
 }
