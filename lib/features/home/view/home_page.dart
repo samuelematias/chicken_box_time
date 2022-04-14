@@ -1,4 +1,5 @@
 import 'package:chicken_box_time/flavor/flavor.dart';
+import 'package:chicken_box_time/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -21,6 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final flavor = Flavor.whatIsTheFlavor;
     final flavorName = flavor.getFlavorName();
     final flavorColor = flavor.getFlavorColor();
@@ -49,6 +51,9 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
+            const SizedBox(height: 16),
+            Text(l10n.counterAppBarTitle),
+            const SizedBox(height: 16),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
