@@ -1,58 +1,50 @@
 import 'package:chicken_box_time/flavor/flavor.dart';
 import 'package:flutter/material.dart';
 
-class FlavorBanner extends StatefulWidget {
-  final Widget? child;
-  final BannerConfig? bannerConfig;
+/// A class to represent the [BannerConfig].
+class BannerConfig {
+  /// Creates a new instance of [BannerConfig].
+  BannerConfig({
+    required this.bannerName,
+    required this.bannerColor,
+  });
 
+  /// Receive the [bannerName] as [String].
+  final String bannerName;
+
+  /// Receive the [bannerColor] as [Color].
+  final Color bannerColor;
+}
+
+/// The widget responsible for creating the [FlavorBanner],
+/// to indicate what flavor is the App currently.
+class FlavorBanner extends StatefulWidget {
+  /// Creates a new instance of [FlavorBanner].
   const FlavorBanner({
     Key? key,
     required this.child,
     this.bannerConfig,
   }) : super(key: key);
 
-  @override
-  _FlavorBannerState createState() => _FlavorBannerState();
-}
+  /// Receive a [Widget] that the [FlavorBanner] will be on above of it.
+  final Widget? child;
 
-class _FlavorBannerState extends State<FlavorBanner> {
-  late BannerConfig _bannerConfig;
-  final flavor = Flavor.whatIsTheFlavor;
-  @override
-  void initState() {
-    super.initState();
-
-    _bannerConfig = widget.bannerConfig ?? _getDefaultBanner();
-  }
+  /// Receive the [BannerConfig],
+  /// that contains the name and the color of the banner.
+  final BannerConfig? bannerConfig;
 
   @override
-  Widget build(BuildContext context) {
-    if (flavor.isProduction()) return widget.child!;
-
-    return Stack(
-      children: <Widget>[
-        widget.child!,
-        _CustomBanner(bannerConfig: _bannerConfig, context: context)
-      ],
-    );
-  }
-
-  BannerConfig _getDefaultBanner() {
-    return BannerConfig(
-      bannerName: flavor.getFlavorBannerName(),
-      bannerColor: flavor.getFlavorBannerColor(),
-    );
-  }
+  State<FlavorBanner> createState() => _FlavorBannerState();
 }
 
 class _CustomBanner extends StatelessWidget {
-  final BannerConfig bannerConfig;
-  final BuildContext context;
-
   const _CustomBanner({
     required this.bannerConfig,
     required this.context,
   });
+
+  final BannerConfig bannerConfig;
+  final BuildContext context;
 
   @override
   Widget build(BuildContext context) {
@@ -72,12 +64,32 @@ class _CustomBanner extends StatelessWidget {
   }
 }
 
-class BannerConfig {
-  final String bannerName;
-  final Color bannerColor;
+class _FlavorBannerState extends State<FlavorBanner> {
+  late BannerConfig _bannerConfig;
+  final flavor = Flavor.whatIsTheFlavor;
+  @override
+  Widget build(BuildContext context) {
+    if (flavor.isProduction()) return widget.child!;
 
-  BannerConfig({
-    required this.bannerName,
-    required this.bannerColor,
-  });
+    return Stack(
+      children: <Widget>[
+        widget.child!,
+        _CustomBanner(bannerConfig: _bannerConfig, context: context)
+      ],
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _bannerConfig = widget.bannerConfig ?? _getDefaultBanner();
+  }
+
+  BannerConfig _getDefaultBanner() {
+    return BannerConfig(
+      bannerName: flavor.getFlavorBannerName(),
+      bannerColor: flavor.getFlavorBannerColor(),
+    );
+  }
 }

@@ -9,6 +9,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 export 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+/// A collection of [BuildContext] class/type extensions, focus on [l10n] scope.
 extension AppLocalizationsX on BuildContext {
+  /// Extension to make accessing and using [l10n] easier, syntax sugar.
   AppLocalizations get l10n => AppLocalizations.of(this);
 }

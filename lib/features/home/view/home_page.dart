@@ -2,9 +2,15 @@ import 'package:chicken_box_time/flavor/flavor.dart';
 import 'package:chicken_box_time/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
+/// The widget responsible for creating the [MyHomePage],
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  /// Creates a new instance of [MyHomePage].
+  const MyHomePage({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
 
+  /// Receive the [title] as [String].
   final String title;
 
   @override
