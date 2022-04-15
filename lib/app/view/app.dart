@@ -4,13 +4,15 @@ import 'package:chicken_box_time/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+/// The widget responsible for creating the [App].
 class App extends StatelessWidget {
+  /// Creates a new instance of [App].
   const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Chicken Box Time',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
