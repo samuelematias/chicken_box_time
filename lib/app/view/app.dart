@@ -4,6 +4,7 @@ import 'package:chicken_box_time/l10n/l10n.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 /// The widget responsible for creating the [App].
@@ -29,6 +30,14 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBase(
       title: 'Chicken Box Time',
+      appLogo: ExactAssetPicture(
+        SvgPicture.svgStringDecoderBuilder,
+        '',
+      ),
+      darkAppLogo: ExactAssetPicture(
+        SvgPicture.svgStringDecoderBuilder,
+        '',
+      ),
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
       localizationsDelegates: const [

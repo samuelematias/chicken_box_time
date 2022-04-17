@@ -1,6 +1,7 @@
 import 'package:design_system/src/theme/data/data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 /// Class responsible to make available,
 /// the [AppThemeData] with all other data.
@@ -12,32 +13,43 @@ class AppThemeData extends Equatable {
     required this.typography,
     required this.spacing,
     required this.formFactor,
+    required this.images,
     TargetPlatform? platform,
   }) : _platform = platform;
 
   /// Set each other data.
-  factory AppThemeData.regular() => AppThemeData(
+
+  factory AppThemeData.regular({
+    required PictureProvider appLogo,
+  }) =>
+      AppThemeData(
         formFactor: AppFormFactor.medium,
         icons: AppIconsData.regular(),
         typography: AppTypographyData.regular(),
         colors: AppColorsData.light(),
         spacing: AppSpacingData.regular(),
+        images: AppImagesData.regular(
+          appLogo: appLogo,
+        ),
       );
 
-  /// Reference the icons data.
+  /// Reference the [icons] data.
   final AppIconsData icons;
 
-  /// Reference the colors data.
+  /// Reference the [colors] data.
   final AppColorsData colors;
 
-  /// Reference the typography data.
+  /// Reference the [typography] data.
   final AppTypographyData typography;
 
-  /// Reference the spacing data.
+  /// Reference the [spacing] data.
   final AppSpacingData spacing;
 
-  /// Reference the formFactor data.
+  /// Reference the [formFactor] data.
   final AppFormFactor formFactor;
+
+  /// Reference the [images] data.
+  final AppImagesData images;
 
   /// Reference the [TargetPlatform].
   final TargetPlatform? _platform;
@@ -52,9 +64,10 @@ class AppThemeData extends Equatable {
         colors,
         typography,
         spacing,
+        images,
       ];
 
-  ///
+  /// Update the current [colors] value.
   AppThemeData withColors(AppColorsData colors) {
     return AppThemeData(
       platform: platform,
@@ -63,10 +76,11 @@ class AppThemeData extends Equatable {
       icons: icons,
       spacing: spacing,
       typography: typography,
+      images: images,
     );
   }
 
-  ///
+  /// Update the current [formFactor] value.
   AppThemeData withFormFactor(AppFormFactor formFactor) {
     return AppThemeData(
       platform: platform,
@@ -75,10 +89,11 @@ class AppThemeData extends Equatable {
       icons: icons,
       spacing: spacing,
       typography: typography,
+      images: images,
     );
   }
 
-  ///
+  /// Update the current [typography] value.
   AppThemeData withTypography(AppTypographyData typography) {
     return AppThemeData(
       platform: platform,
@@ -87,6 +102,20 @@ class AppThemeData extends Equatable {
       icons: icons,
       spacing: spacing,
       typography: typography,
+      images: images,
+    );
+  }
+
+  /// Update the current [images] value.
+  AppThemeData withImages(AppImagesData images) {
+    return AppThemeData(
+      platform: platform,
+      formFactor: formFactor,
+      colors: colors,
+      icons: icons,
+      spacing: spacing,
+      typography: typography,
+      images: images,
     );
   }
 }

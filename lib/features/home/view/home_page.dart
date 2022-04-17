@@ -50,7 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Your Flavor is $flavorName'),
+                Text(
+                  'Your Flavor is $flavorName',
+                  style: TextStyle(
+                    color: colorTheme.font,
+                  ),
+                ),
                 Icon(
                   Icons.icecream,
                   color: flavorColor,
@@ -58,15 +63,28 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'You have pushed the button this many times:',
+              style: theme.typography.titleLarge.copyWith(
+                color: colorTheme.font,
+              ),
+              // style: TextStyle(
+              //   color: colorTheme.font,
+              // ),
             ),
             const SizedBox(height: 16),
-            Text(l10n.counterAppBarTitle),
+            Text(
+              l10n.counterAppBarTitle,
+              style: TextStyle(
+                color: colorTheme.font,
+              ),
+            ),
             const SizedBox(height: 16),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: TextStyle(
+                color: colorTheme.font,
+              ),
             ),
           ],
         ),
