@@ -1,0 +1,33 @@
+{
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "flutter-separate": {
+      "transformGroup": "flutter-separate",
+      "buildPath": "../lib/src/foundations/tokens/",
+      "files": [
+        {
+          "destination": "color.style_dictionary.dart",
+          "format": "flutter/class.dart",
+          "className": "ColorTokens",
+          "type": "color",
+          "filter": {
+            "attributes": {
+              "category": "color"
+            }
+          }
+        },
+        {
+          "destination": "size.style_dictionary.dart",
+          "format": "flutter/class.dart",
+          "className": "SizeTokens",
+          "type": "float",
+          "filter": {
+            "attributes": {
+              "category": "size"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
