@@ -6,5 +6,7 @@ import 'package:flutter/widgets.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Flavor.setEnvironment(Environment.development);
-  bootstrap(() => const App());
+  bootstrap(() {
+    return App();
+  });
 }

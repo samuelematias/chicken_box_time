@@ -1,5 +1,6 @@
 import 'package:chicken_box_time/flavor/flavor.dart';
 import 'package:chicken_box_time/l10n/l10n.dart';
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 
 /// The widget responsible for creating the [MyHomePage],
@@ -32,9 +33,12 @@ class _MyHomePageState extends State<MyHomePage> {
     final flavor = Flavor.whatIsTheFlavor;
     final flavorName = flavor.getFlavorName();
     final flavorColor = flavor.getFlavorColor();
+    final theme = AppTheme.of(context);
+    final colorTheme = theme.colors;
     return Scaffold(
+      backgroundColor: colorTheme.background,
       appBar: AppBar(
-        backgroundColor: flavorColor,
+        backgroundColor: colorTheme.brand,
         title: Text(
           'You are running $flavorName App',
         ),
@@ -68,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: flavorColor,
+        backgroundColor: colorTheme.brand,
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
