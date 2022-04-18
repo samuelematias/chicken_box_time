@@ -1,6 +1,6 @@
 import 'package:chicken_box_time/flavor/flavor.dart';
 import 'package:chicken_box_time/l10n/l10n.dart';
-import 'package:design_system/design_system.dart';
+import 'package:design_system/design_system.dart' as ds;
 import 'package:flutter/material.dart';
 
 /// The widget responsible for creating the [MyHomePage],
@@ -33,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final flavor = Flavor.whatIsTheFlavor;
     final flavorName = flavor.getFlavorName();
     final flavorColor = flavor.getFlavorColor();
-    final theme = AppTheme.of(context);
+    final theme = ds.AppTheme.of(context);
     final colorTheme = theme.colors;
     return Scaffold(
       backgroundColor: colorTheme.background,
@@ -73,11 +73,9 @@ class _MyHomePageState extends State<MyHomePage> {
               // ),
             ),
             const SizedBox(height: 16),
-            Text(
+            ds.Text(
               l10n.counterAppBarTitle,
-              style: TextStyle(
-                color: colorTheme.font,
-              ),
+              style: ds.CustomTextStyle.labelSmall,
             ),
             const SizedBox(height: 16),
             Text(

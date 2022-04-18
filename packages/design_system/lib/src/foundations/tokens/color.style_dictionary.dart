@@ -4,7 +4,7 @@
 //
 
 // Do not edit directly
-// Generated on Sun, 17 Apr 2022 02:29:34 GMT
+// Generated on Sun, 17 Apr 2022 23:22:05 GMT
 
 
 
@@ -14,10 +14,13 @@ class ColorTokens {
   ColorTokens._();
 
     static const backgroundActive = Color(0xFF9146FF);
+    static const backgroundActiveDark = Color(0xFFBFABFF);
     static const backgroundDanger = Color(0xFFFFCCCC);
     static const backgroundDisabled = Color(0xFFD2D2E6);
     static const backgroundHover = Color(0xFFBFABFF);
+    static const backgroundHoverDark = Color(0xFF9146FF);
     static const backgroundInteractive = Color(0xFF9146FF);
+    static const backgroundInteractiveDark = Color(0xFFBFABFF);
     static const backgroundPrimary = Color(0xFFF0F0FF);
     static const backgroundQuaternary = Color(0xFF9146FF);
     static const backgroundSecondary = Color(0xFF000000);

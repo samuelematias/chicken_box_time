@@ -84,7 +84,7 @@ class AppResponsiveTheme extends StatelessWidget {
     }
 
     // Updating the sizes for current form factor.
-    var formFactor = this.formFactor ?? formFactorOf(context);
+    final formFactor = this.formFactor ?? formFactorOf(context);
     theme = theme.withFormFactor(formFactor);
     if (formFactor == AppFormFactor.small) {
       theme = theme.withTypography(AppTypographyData.regular());

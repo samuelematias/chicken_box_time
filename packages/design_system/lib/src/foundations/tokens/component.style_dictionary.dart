@@ -18,9 +18,16 @@ class ComponentTokens {
 
   static const buttonPadding = SizeTokens.paddingMedium;
   static const buttonFontSize = SizeTokens.fontMedium;
-  static const buttonFontColor = ColorTokens.fontInteractive;
-  static const buttonPrimaryBackgroundColor = ColorTokens.backgroundInteractive;
+  static const buttonFontColor = ColorTokens.fontSecondary;
+  static const buttonFontColorDark = ColorTokens.fontPrimary;
+  static const buttonInteractiveBackgroundColor =
+      ColorTokens.backgroundInteractive;
   static const buttonHoverBackgroundColor = ColorTokens.backgroundHover;
   static const buttonActiveBackgroundColor = ColorTokens.backgroundActive;
+  static const buttonInteractiveBackgroundColorDark =
+      ColorTokens.backgroundInteractiveDark;
+  static const buttonHoverBackgroundColorDark = ColorTokens.backgroundHoverDark;
+  static const buttonActiveBackgroundColorDark =
+      ColorTokens.backgroundActiveDark;
   static const buttonDisabledBackgroundColor = ColorTokens.backgroundDisabled;
 }

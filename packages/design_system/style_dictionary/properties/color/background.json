@@ -9,6 +9,11 @@
       "interactive": { "value": "{color.brand.primary.base.value}" },
       "hover": { "value": "{color.brand.primary.dark.value}" },
       "active": { "value": "{color.brand.primary.base.value}" },
+
+      "interactive-dark": { "value": "{color.brand.primary.dark.value}" },
+      "hover-dark": { "value": "{color.brand.primary.base.value}" },
+      "active-dark": { "value": "{color.brand.primary.dark.value}" },
+
       "disabled": { "value": "{color.core.smoke.value}" },
 
       "danger": { "value": "{color.core.red.0.value}" },

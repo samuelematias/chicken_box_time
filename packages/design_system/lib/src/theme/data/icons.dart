@@ -15,7 +15,7 @@ class AppIconsData extends Equatable {
   /// Get all font icons.
   /// Icons have been exported with "Export Icon Font" Figma plugin.
   factory AppIconsData.regular() => AppIconsData(
-        fontFamily: 'asgard_icons',
+        fontFamily: 'custom_icons',
         fontPackage: packageName,
         characters: AppIconCharactersData.regular(),
         sizes: AppIconSizesData.regular(),

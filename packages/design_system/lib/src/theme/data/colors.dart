@@ -50,13 +50,15 @@ class AppColorsData extends Equatable {
         fontSuccess: ColorTokens.fontSuccess,
         fontDanger: ColorTokens.fontDanger,
         fontWarning: ColorTokens.fontWarning,
-        buttonFontColor: ComponentTokens.buttonFontColor,
-        buttonBackgroundColor: ComponentTokens.buttonPrimaryBackgroundColor,
+        buttonFontColor: ComponentTokens.buttonFontColorDark,
+        buttonBackgroundColor:
+            ComponentTokens.buttonInteractiveBackgroundColorDark,
         buttonActiveBackgroundColor:
-            ComponentTokens.buttonActiveBackgroundColor,
+            ComponentTokens.buttonActiveBackgroundColorDark,
         buttonDisabledBackgroundColor:
             ComponentTokens.buttonDisabledBackgroundColor,
-        buttonHoverBackgroundColor: ComponentTokens.buttonHoverBackgroundColor,
+        buttonHoverBackgroundColor:
+            ComponentTokens.buttonHoverBackgroundColorDark,
       );
 
   /// Color scheme for Light mode
@@ -79,7 +81,7 @@ class AppColorsData extends Equatable {
         fontDanger: ColorTokens.fontDanger,
         fontWarning: ColorTokens.fontWarning,
         buttonFontColor: ComponentTokens.buttonFontColor,
-        buttonBackgroundColor: ComponentTokens.buttonPrimaryBackgroundColor,
+        buttonBackgroundColor: ComponentTokens.buttonInteractiveBackgroundColor,
         buttonActiveBackgroundColor:
             ComponentTokens.buttonActiveBackgroundColor,
         buttonDisabledBackgroundColor:

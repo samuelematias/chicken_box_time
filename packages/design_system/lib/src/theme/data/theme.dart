@@ -51,7 +51,10 @@ class AppThemeData extends Equatable {
   /// Reference the [images] data.
   final AppImagesData images;
 
+  /// This variable is used later on,
+  /// although it says it is not being used.
   /// Reference the [TargetPlatform].
+  // ignore: unused_field
   final TargetPlatform? _platform;
 
   /// Get the [TargetPlatform] value.
