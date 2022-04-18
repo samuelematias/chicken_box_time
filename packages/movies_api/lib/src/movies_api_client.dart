@@ -22,7 +22,7 @@ class MovieApiClient {
   final http.Client _httpClient;
 
   /// Fetches [Movies].
-  Future<MovieDetails> getMovies() async {
+  Future<List<MovieDetails>> getMovies() async {
     const apiTokenv4 = 'eyJhbGciOiJIUzI1NiJ9.'
         'eyJhdWQiOiJlODBkNTZjM2NmNzk0'
         'ZWJmN2Q5NmVhYjdkMDkzNzE4'
@@ -51,12 +51,15 @@ class MovieApiClient {
       throw MoviesNotFoundFailure();
     }
 
-    final moviesJson = bodyJson['results'] as List<MovieDetails>;
+    final moviesListJson = bodyJson['results'] as List<MovieDetails>;
 
-    if (moviesJson.isEmpty) {
+    if (moviesListJson.isEmpty) {
       throw MoviesNotFoundFailure();
     }
-
-    return MovieDetails.fromJson(moviesJson as JsonMap);
+    return moviesListJson
+        .map(
+          (movieJson) => MovieDetails.fromJson(movieJson as JsonMap),
+        )
+        .toList();
   }
 }

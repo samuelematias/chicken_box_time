@@ -5,11 +5,11 @@ import 'package:movies_api/movies_api.dart';
 /// Exception thrown when getMovies fails.
 class MovieFailure implements Exception {}
 
-/// {@template movies_repository}
+/// {@template movie_repository}
 /// A repository that handles movie related requests.
 /// {@endtemplate}
 class MovieRepository {
-  /// {@macro movies_repository}
+  /// {@macro movie_repository}
   MovieRepository({
     MovieApiClient? movieApiClient,
   }) : _movieApiClient = movieApiClient ?? MovieApiClient();
@@ -17,7 +17,7 @@ class MovieRepository {
   final MovieApiClient _movieApiClient;
 
   /// Provides a [MovieDetails] of all movies.
-  Future<MovieDetails> getMovies() async {
+  Future<List<MovieDetails>> getMovies() async {
     final movieResponse = await _movieApiClient.getMovies();
     return movieResponse;
   }
