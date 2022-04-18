@@ -33,7 +33,7 @@ class SearchBar extends SearchDelegate<dynamic> {
 
   @override
   Widget? buildLeading(BuildContext context) => IconButton(
-tooltip: 'Back Button',
+        tooltip: 'Back Button',
         icon: Icon(
           Icons.arrow_back,
           color: ds.AppTheme.of(context).colors.brand,
@@ -45,8 +45,9 @@ tooltip: 'Back Button',
 
   @override
   Widget buildResults(BuildContext context) => Center(
-        child: Text(
+        child: ds.Text(
           query,
+          style: ds.CustomTextStyle.labelMedium,
         ),
       );
 
@@ -65,9 +66,15 @@ tooltip: 'Back Button',
       itemBuilder: (context, index) {
         final suggestion = suggesstions[index];
         return ListTile(
-          title: Text(suggestion),
+          title: ds.Text(
+            suggestion,
+            style: ds.CustomTextStyle.labelMedium,
+          ),
           onTap: () {
             query = suggestion;
+
+            /// This action is toggled when your click on some item
+            /// or click on seach in your mobile keyboard.
 
             /// Close the search page after click in a item.
             // close(context, null);
@@ -77,6 +84,33 @@ tooltip: 'Back Button',
           },
         );
       },
+    );
+  }
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    final theme = ds.AppTheme.of(context);
+    final colorTheme = theme.colors;
+    return Theme.of(context).copyWith(
+      scaffoldBackgroundColor: colorTheme.background,
+      appBarTheme: AppBarTheme(
+        backgroundColor: colorTheme.background,
+        elevation: 0,
+      ),
+      textTheme: TextTheme(
+        headline6: theme.typography.titleMedium.copyWith(
+          color: colorTheme.font,
+        ),
+      ),
+      inputDecorationTheme: searchFieldDecorationTheme ??
+          InputDecorationTheme(
+            border: InputBorder.none,
+            focusColor: colorTheme.background,
+            focusedBorder: InputBorder.none,
+            hintStyle: theme.typography.titleMedium.copyWith(
+              color: colorTheme.font,
+            ),
+          ),
     );
   }
 }
