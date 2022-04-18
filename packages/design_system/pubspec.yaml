@@ -1,0 +1,40 @@
+name: design_system
+description: A dedicated package for app Design system.
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  cached_network_image: ^3.2.0
+  equatable: ^2.0.3
+  flutter:
+    sdk: flutter
+  flutter_svg: ^1.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^2.4.0
+
+flutter:
+  assets:
+    - assets/images/
+  fonts:
+    - family: custom_icons
+      fonts:
+        - asset: packages/design_system/fonts/custom_icons.ttf
+    - family: Schelter
+      fonts:
+        - asset: packages/design_system/fonts/Schelter.ttf
+    - family: Shapiro
+      fonts:
+        - asset: packages/design_system/fonts/Shapiro.ttf
+    - family: Biotif Book
+      fonts:
+        - asset: packages/design_system/fonts/Biotif_Book.ttf
+    - family: Eina
+      fonts:
+        - asset: packages/design_system/fonts/Eina.ttf

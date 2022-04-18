@@ -1,0 +1,24 @@
+{
+  "color": {
+    "background": {
+      "primary": { "value": "{color.core.white.100.value}" },
+      "secondary": { "value": "{color.core.black.value}" },
+      "tertiary": { "value": "{color.core.purple.0.value}" },
+      "quaternary": { "value": "{color.core.purple.100.value}" },
+
+      "interactive": { "value": "{color.brand.primary.base.value}" },
+      "hover": { "value": "{color.brand.primary.dark.value}" },
+      "active": { "value": "{color.brand.primary.base.value}" },
+
+      "interactive-dark": { "value": "{color.brand.primary.dark.value}" },
+      "hover-dark": { "value": "{color.brand.primary.base.value}" },
+      "active-dark": { "value": "{color.brand.primary.dark.value}" },
+
+      "disabled": { "value": "{color.core.smoke.value}" },
+
+      "danger": { "value": "{color.core.red.0.value}" },
+      "warning": { "value": "{color.core.yellow.0.value}" },
+      "success": { "value": "{color.core.green.0.value}" }
+    }
+  }
+}

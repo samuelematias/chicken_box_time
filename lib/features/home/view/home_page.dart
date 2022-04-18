@@ -1,5 +1,6 @@
 import 'package:chicken_box_time/flavor/flavor.dart';
 import 'package:chicken_box_time/l10n/l10n.dart';
+import 'package:design_system/design_system.dart' as ds;
 import 'package:flutter/material.dart';
 
 /// The widget responsible for creating the [MyHomePage],
@@ -32,9 +33,12 @@ class _MyHomePageState extends State<MyHomePage> {
     final flavor = Flavor.whatIsTheFlavor;
     final flavorName = flavor.getFlavorName();
     final flavorColor = flavor.getFlavorColor();
+    final theme = ds.AppTheme.of(context);
+    final colorTheme = theme.colors;
     return Scaffold(
+      backgroundColor: colorTheme.background,
       appBar: AppBar(
-        backgroundColor: flavorColor,
+        backgroundColor: colorTheme.brand,
         title: Text(
           'You are running $flavorName App',
         ),
@@ -46,7 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Your Flavor is $flavorName'),
+                Text(
+                  'Your Flavor is $flavorName',
+                  style: TextStyle(
+                    color: colorTheme.font,
+                  ),
+                ),
                 Icon(
                   Icons.icecream,
                   color: flavorColor,
@@ -54,21 +63,32 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'You have pushed the button this many times:',
+              style: theme.typography.titleLarge.copyWith(
+                color: colorTheme.font,
+              ),
+              // style: TextStyle(
+              //   color: colorTheme.font,
+              // ),
             ),
             const SizedBox(height: 16),
-            Text(l10n.counterAppBarTitle),
+            ds.Text(
+              l10n.counterAppBarTitle,
+              style: ds.CustomTextStyle.labelSmall,
+            ),
             const SizedBox(height: 16),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: TextStyle(
+                color: colorTheme.font,
+              ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: flavorColor,
+        backgroundColor: colorTheme.brand,
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),

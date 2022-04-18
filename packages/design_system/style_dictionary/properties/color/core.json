@@ -1,0 +1,39 @@
+{
+  "color": {
+    "core": {
+      "black": { "value": "#000000" },
+
+      "white": {
+        "0": { "value": "#ffffff" },
+        "100" : { "value": "#f0f0ff" }
+      },
+
+      "purple": {
+        "0" : { "value": "#bfabff" },
+        "100": { "value": "#9146ff" }
+      },
+
+      "smoke": { "value": "#d2d2e6" },
+
+      "green": {
+        "0" : { "value": "#d7f4d7" },
+        "100" : { "value": "#08422f" }
+      },
+
+      "blue": {
+        "0" : { "value": "#2079c3" },
+        "100" : { "value": "#0c5689" }
+      },
+
+      "red": {
+        "0" : { "value": "#ffcccc" },
+        "100" : { "value": "#6d1313" }
+      },
+
+      "yellow": {
+        "0" : { "value": "#fdefcd" },
+        "100" : { "value": "#542a00" }
+      }
+    }
+  }
+}

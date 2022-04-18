@@ -1,0 +1,20 @@
+{
+  "color": {
+    "font": {
+      "primary": { "value": "{color.core.white.100.value}" },
+      "secondary": { "value": "{color.core.black.value}" },
+      "tertiary": { "value": "{color.core.smoke.value}" },
+      "quaternary": { "value": "{color.core.purple.0.value}" },
+      "quinaria": { "value": "{color.core.purple.100.value}" },
+
+      "interactive": { "value": "{color.brand.primary.100.value}" },
+      "hover": { "value": "{color.brand.primary.0.value}" },
+      "active": { "value": "{color.brand.primary.100.value}" },
+      "disabled": { "value": "{color.font.tertiary.value}" },
+
+      "danger": { "value": "{color.core.red.100.value}" },
+      "warning": { "value": "{color.core.yellow.100.value}" },
+      "success": { "value": "{color.core.green.100.value}" }
+    }
+  }
+}
