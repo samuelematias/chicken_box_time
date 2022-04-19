@@ -34,13 +34,14 @@ class _MovieListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = ds.AppTheme.of(context);
     final colorTheme = theme.colors;
+    final spacingTheme = theme.spacing;
     final data = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
     return BlocBuilder<MovieCubit, MovieState>(
       builder: (context, state) {
         return Scaffold(
           backgroundColor: colorTheme.background,
           appBar: AppBar(
-            backgroundColor: colorTheme.brand,
+            backgroundColor: colorTheme.background,
             elevation: 0,
             actions: [
               IconButton(
@@ -62,10 +63,13 @@ class _MovieListView extends StatelessWidget {
           body: SafeArea(
             child: SingleChildScrollView(
               child: Center(
-                child: Column(
-                  children: [
-                    _MovieListState(state: state),
-                  ],
+                child: Padding(
+                  padding: EdgeInsets.all(spacingTheme.large),
+                  child: Column(
+                    children: [
+                      _MovieListState(state: state),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -98,6 +102,7 @@ class _MovieListState extends StatelessWidget {
         itemBuilder: (_, index) {
           final movie = state.moviesList[index];
           return ds.Card(
+            onTap: () {},
             imageLeading: movie.posterPath!.getMovieThumbnail(),
             title: movie.title!,
             subtitle: '${movie.popularity}',
