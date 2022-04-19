@@ -18,7 +18,7 @@ class MovieApiClient {
   MovieApiClient({http.Client? httpClient})
       : _httpClient = httpClient ?? http.Client();
 
-  static const _baseUrl = 'https://api.themoviedb.org/4/';
+  static const _baseUrl = 'api.themoviedb.org';
   final http.Client _httpClient;
 
   /// Fetches [Movies].
@@ -31,7 +31,7 @@ class MovieApiClient {
         'MjcyMTYxNjMzYSIsInNjb3BlcyI6Wy'
         'JhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.'
         'hvgT80_nk18JAr8PEpZ7YLBrJa7jJpRdOFgnEqyViqU';
-    const movieListUrl = 'list/1?page=1';
+    const movieListUrl = '/4/list/1';
     final moviesRequest = Uri.https(_baseUrl, movieListUrl);
     final moviesResponse = await _httpClient.get(
       moviesRequest,
@@ -51,14 +51,21 @@ class MovieApiClient {
       throw MoviesNotFoundFailure();
     }
 
-    final moviesListJson = bodyJson['results'] as List<MovieDetails>;
+    // Necessary "ignore this rule experimental"
+    //for hacking the dynamic type.
+    // ignore: cast_nullable_to_non_nullable
+    final moviesListJson = (bodyJson['results'] as List<Object?>)
+        // Necessary "ignore this rule experimental"
+        // for hacking the dynamic type.
+        // ignore: cast_nullable_to_non_nullable
+        .map((json) => json as JsonMap);
 
     if (moviesListJson.isEmpty) {
       throw MoviesNotFoundFailure();
     }
     return moviesListJson
         .map(
-          (movieJson) => MovieDetails.fromJson(movieJson as JsonMap),
+          MovieDetails.fromJson,
         )
         .toList();
   }

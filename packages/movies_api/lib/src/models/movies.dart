@@ -17,71 +17,77 @@ part 'movies.g.dart';
 class Movies extends Equatable {
   /// {@macro movies}
   const Movies({
-    required this.averageRating,
-    required this.backdropPath,
-    required this.description,
-    required this.id,
-    required this.iso_3166_1,
-    required this.iso_639_1,
-    required this.name,
-    required this.page,
-    required this.posterPath,
-    required this.public,
-    required this.results,
-    required this.revenue,
-    required this.runtime,
-    required this.sortBy,
-    required this.totalPages,
-    required this.totalResults,
+    this.averageRating,
+    this.backdropPath,
+    this.description,
+    this.id,
+    this.iso_3166_1,
+    this.iso_639_1,
+    this.name,
+    this.page,
+    this.posterPath,
+    this.public,
+    this.results,
+    this.revenue,
+    this.runtime,
+    this.sortBy,
+    this.totalPages,
+    this.totalResults,
   });
 
   /// The average rating of this movie topic.
-  final double averageRating;
+  @JsonKey(name: 'average_rating')
+  final double? averageRating;
 
   /// The backdrop img.
-  final String backdropPath;
+  @JsonKey(name: 'backdrop_path')
+  final String? backdropPath;
 
   /// The description of the movie topic.
-  final String description;
+  final String? description;
 
   /// The unique identifier of the todo.
-  final int id;
+  final int? id;
 
   /// The movie iso 3166 1.
-  final String iso_3166_1;
+  final String? iso_3166_1;
 
   /// The movie iso 639 1.
-  final String iso_639_1;
+  final String? iso_639_1;
 
   /// The movie topic name.
-  final String name;
+  final String? name;
 
   /// The movie topic page, as pagination.
-  final int page;
+  final int? page;
 
   /// The poster imgae path.
-  final String posterPath;
+  @JsonKey(name: 'poster_path')
+  final String? posterPath;
 
   /// Whether the movie topic is public.
-  final bool public;
+  final bool? public;
 
   /// The movies of this movie topic.
-  final List<MovieDetails> results;
+  final List<MovieDetails>? results;
 
   /// The revenue of the movie topic.
-  final int revenue;
+  final int? revenue;
 
   /// The runtime of the movie topic.
-  final int runtime;
+  final int? runtime;
 
   /// How the movies are sorted.
-  final String sortBy;
+  @JsonKey(name: 'sort_by')
+  final String? sortBy;
 
   /// The total pages of this movie topic, as pagination.
-  final int totalPages;
+  @JsonKey(name: 'total_pages')
+  final int? totalPages;
 
   /// The total movies in this movie topic
-  final int totalResults;
+  @JsonKey(name: 'total_results')
+  final int? totalResults;
 
   /// Returns a copy of this todo with the given values updated.
   ///

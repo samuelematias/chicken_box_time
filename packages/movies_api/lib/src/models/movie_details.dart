@@ -17,67 +17,76 @@ part 'movie_details.g.dart';
 class MovieDetails extends Equatable {
   /// {@macro movie_details}
   const MovieDetails({
-    required this.adult,
-    required this.backdropPath,
-    required this.genreIds,
-    required this.id,
-    required this.mediaType,
-    required this.originalLanguage,
-    required this.originalTitle,
-    required this.overview,
-    required this.popularity,
-    required this.posterPath,
-    required this.releaseDate,
-    required this.title,
-    required this.video,
-    required this.voteAverage,
-    required this.voteCount,
+    this.adult,
+    this.backdropPath,
+    this.genreIds,
+    this.id,
+    this.mediaType,
+    this.originalLanguage,
+    this.originalTitle,
+    this.overview,
+    this.popularity,
+    this.posterPath,
+    this.releaseDate,
+    this.title,
+    this.video,
+    this.voteAverage,
+    this.voteCount,
   });
 
   /// Whether the movie is for adults only.
-  final bool adult;
+  final bool? adult;
 
   /// The backdrop img.
-  final String backdropPath;
+  @JsonKey(name: 'backdrop_path')
+  final String? backdropPath;
 
   /// The genre ids.
-  final List<int> genreIds;
+  @JsonKey(name: 'genre_ids')
+  final List<int>? genreIds;
 
   /// The unique identifier of the todo.
-  final int id;
+  final int? id;
 
   /// The media type, in this case movie type.
-  final String mediaType;
+  @JsonKey(name: 'media_type')
+  final String? mediaType;
 
   /// The original languange of the movie.
-  final String originalLanguage;
+  @JsonKey(name: 'original_language')
+  final String? originalLanguage;
 
   /// The original title of the movie.
-  final String originalTitle;
+  @JsonKey(name: 'original_title')
+  final String? originalTitle;
 
   /// The movie introduction.
-  final String overview;
+  final String? overview;
 
   /// The filme popularity.
-  final double popularity;
+  final double? popularity;
 
   /// The poster imgae path.
-  final String posterPath;
+  @JsonKey(name: 'poster_path')
+  final String? posterPath;
 
   /// The release date of the movie.
-  final String releaseDate;
+  @JsonKey(name: 'release_date')
+  final String? releaseDate;
 
   /// The title of the movie.
-  final String title;
+  final String? title;
 
   /// Whether the movie has video.
-  final bool video;
+  final bool? video;
 
   /// The vote average of the movie.
-  final double voteAverage;
+  @JsonKey(name: 'vote_average')
+  final double? voteAverage;
 
   /// The vote count of the movie.
-  final int voteCount;
+  @JsonKey(name: 'vote_count')
+  final int? voteCount;
 
   /// Returns a copy of this todo with the given values updated.
   ///
