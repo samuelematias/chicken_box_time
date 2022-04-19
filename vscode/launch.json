@@ -5,6 +5,7 @@
             "name": "development",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main_development.dart",
             "args": [
                 "-t",
                 "lib/main_development.dart",
@@ -16,6 +17,7 @@
             "name": "staging",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main_staging.dart",
             "args": [
                 "-t",
                 "lib/main_staging.dart",
@@ -27,6 +29,7 @@
             "name": "production",
             "request": "launch",
             "type": "dart",
+            "program": "lib/main_production.dart",
             "args": [
                 "-t",
                 "lib/main_production.dart",
