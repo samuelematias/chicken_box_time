@@ -2,6 +2,7 @@ import 'package:chicken_box_time/features/movie/cubit/movie_cubit.dart';
 import 'package:design_system/design_system.dart' as ds;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:movie_repository/movie_repository.dart';
 import 'package:movies_api/movies_api.dart';
 
@@ -40,27 +41,9 @@ class _MovieListView extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           backgroundColor: colorTheme.background,
-          appBar: AppBar(
-            backgroundColor: colorTheme.background,
-            elevation: 0,
-            actions: [
-              IconButton(
-                onPressed: () {
-                  showSearch<dynamic>(
-                    context: context,
-                    delegate: ds.SearchBar(
-                      data: data,
-                    ),
-                  );
-                },
-                icon: Icon(
-                  Icons.search,
-                  color: colorTheme.font,
-                ),
-              )
-            ],
-          ),
           body: SafeArea(
+            top: false,
+            bottom: false,
             child: SingleChildScrollView(
               child: Center(
                 child: Padding(
@@ -73,6 +56,29 @@ class _MovieListView extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+          floatingActionButton: SpeedDial(
+            overlayOpacity: 0,
+            icon: Icons.interests_rounded,
+            backgroundColor: colorTheme.brand,
+            children: [
+              SpeedDialChild(
+                child: Icon(
+                  Icons.search,
+                  color: colorTheme.font,
+                ),
+                label: 'Search',
+                backgroundColor: colorTheme.brand,
+                onTap: () {
+                  showSearch<dynamic>(
+                    context: context,
+                    delegate: ds.SearchBar(
+                      data: data,
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
         );
       },
