@@ -1,7 +1,27 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+   "defaultErrorMessage": "Something is wrong! Please, Try again later.",
+    "@defaultErrorMessage": {
+        "description": "Default error message used in app."
+    },
+    "defaultApiErrorMessage": "We had an Unexpected error. Please, Try again later.",
+    "@defaultApiErrorMessage": {
+        "description": "Default API error message used in app."
+    },
+    "notfoundErrorMessage": "Ops! Movie(s) not found. Please, Try again later.",
+    "@notfoundErrorMessage": {
+        "description": "In case something is not found, mostly used on api calls, when the returned error is a status.code = 404."
+    },
+    "retryButtonMessage": "Try again",
+    "@retryButtonMessage": {
+        "description": "When is necessary, trying again something, like an API call/request."
+    },
+    "movieNotFoundBySearch": "Movie not found, try another movie.",
+    "@movieNotFoundBySearch": {
+        "description": "When a movie is not found by search."
+    },
+    "moviePopularity": "Popularity",
+    "@moviePopularity": {
+        "description": "Popularity of the film by the public."
     }
 }

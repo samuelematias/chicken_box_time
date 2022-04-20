@@ -1,0 +1,23 @@
+name: movie_repository
+description: A movie repository package.
+version: 0.0.1
+homepage:
+publish_to: none
+
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  movies_api:
+    path: ../movies_api
+
+
+dev_dependencies:
+  mocktail: ^0.3.0
+  test: ^1.21.0
+  very_good_analysis: ^2.4.0
+
+flutter:

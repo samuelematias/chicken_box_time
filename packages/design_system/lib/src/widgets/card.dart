@@ -10,6 +10,7 @@ class Card extends StatelessWidget {
     this.imageLeading = '',
     required this.title,
     this.subtitle = '',
+    this.onTap,
   }) : super(key: key);
 
   /// A widget to display before the title.
@@ -21,62 +22,67 @@ class Card extends StatelessWidget {
   /// Additional content displayed below the title.
   final String subtitle;
 
+  /// The pressed action.
+  final GestureTapCallback? onTap;
   @override
   Widget build(BuildContext context) {
     final theme = ds.AppTheme.of(context);
-    return Container(
-      height: 200,
-      decoration: BoxDecoration(
-        color: theme.colors.brand,
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(15),
-              bottomLeft: Radius.circular(15),
-            ),
-            child: Visibility(
-              visible: imageLeading.isNotEmpty,
-              child: _ImageLeading(imageUrl: imageLeading),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(theme.spacing.large),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ds.Text(
-                    title,
-                    style: ds.CustomTextStyle.labelMedium,
-                    softWrap: true,
-                    overflow: TextOverflow.visible,
-                  ),
-                  Visibility(
-                    visible: subtitle.isNotEmpty,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: theme.spacing.small,
-                        ),
-                        ds.Text(
-                          subtitle,
-                          style: ds.CustomTextStyle.labelSmall,
-                          softWrap: true,
-                          overflow: TextOverflow.visible,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 200,
+        decoration: BoxDecoration(
+          color: theme.colors.brand,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(15),
+                bottomLeft: Radius.circular(15),
+              ),
+              child: Visibility(
+                visible: imageLeading.isNotEmpty,
+                child: _ImageLeading(imageUrl: imageLeading),
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(theme.spacing.large),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ds.Text(
+                      title,
+                      style: ds.CustomTextStyle.labelMedium,
+                      softWrap: true,
+                      overflow: TextOverflow.visible,
+                    ),
+                    Visibility(
+                      visible: subtitle.isNotEmpty,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: theme.spacing.small,
+                          ),
+                          ds.Text(
+                            subtitle,
+                            style: ds.CustomTextStyle.labelSmall,
+                            softWrap: true,
+                            overflow: TextOverflow.visible,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -93,14 +99,20 @@ class _ImageLeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ds.AppTheme.of(context);
     return CachedNetworkImage(
       fadeInDuration: const Duration(milliseconds: 400),
       fit: BoxFit.cover,
       imageUrl: imageUrl,
       width: 175,
-      placeholder: (context, url) => const Icon(Icons.image),
-      errorWidget: (context, url, dynamic error) =>
-          const Icon(Icons.broken_image),
+      placeholder: (context, url) => Icon(
+        Icons.image,
+        color: theme.colors.font,
+      ),
+      errorWidget: (context, url, dynamic error) => Icon(
+        Icons.broken_image,
+        color: theme.colors.font,
+      ),
     );
   }
 }
