@@ -30,7 +30,6 @@ class MovieState extends Equatable {
     this.moviesList = const <MovieDetails>[],
     this.moviesListSearched = const <MovieDetails>[],
     this.errorType = ErrorType.none,
-    this.errorMessage = '',
   });
 
   /// Initial state of [MovieState].
@@ -42,7 +41,6 @@ class MovieState extends Equatable {
           moviesList: const <MovieDetails>[],
           moviesListSearched: const <MovieDetails>[],
           errorType: ErrorType.none,
-          errorMessage: '',
         );
 
   /// Loading state of [MovieState].
@@ -57,7 +55,6 @@ class MovieState extends Equatable {
           moviesList: moviesList,
           moviesListSearched: moviesListSearched,
           errorType: ErrorType.none,
-          errorMessage: '',
         );
 
   /// Fetching the API give an error state of [MovieState].
@@ -66,7 +63,6 @@ class MovieState extends Equatable {
     List<MovieDetails> moviesList = const <MovieDetails>[],
     List<MovieDetails> moviesListSearched = const <MovieDetails>[],
     ErrorType errorType = ErrorType.defaultError,
-    String errorMessage = defaultErrorMessage,
   }) : this(
           isLoading: false,
           isSearchBarNotEmpty: false,
@@ -74,7 +70,6 @@ class MovieState extends Equatable {
           moviesList: moviesList,
           moviesListSearched: moviesListSearched,
           errorType: errorType,
-          errorMessage: errorMessage,
         );
 
   /// Fetching the API was success state of [MovieState].
@@ -89,7 +84,6 @@ class MovieState extends Equatable {
           moviesList: moviesList,
           moviesListSearched: moviesListSearched,
           errorType: ErrorType.none,
-          errorMessage: '',
         );
 
   /// copyWith method for the [MovieState].
@@ -100,7 +94,6 @@ class MovieState extends Equatable {
     List<MovieDetails>? moviesList,
     List<MovieDetails>? moviesListSearched,
     ErrorType? errorType,
-    String? errorMessage,
   }) {
     return MovieState(
       isLoading: isLoading ?? this.isLoading,
@@ -109,7 +102,6 @@ class MovieState extends Equatable {
       moviesList: moviesList ?? this.moviesList,
       moviesListSearched: moviesListSearched ?? this.moviesListSearched,
       errorType: errorType ?? this.errorType,
-      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
@@ -135,9 +127,6 @@ class MovieState extends Equatable {
   /// If has some error in the process.
   final ErrorType errorType;
 
-  /// Contains [errorMessage] from the [errorType].
-  final String errorMessage;
-
   @override
   List<Object> get props => [
         isLoading,
@@ -146,6 +135,5 @@ class MovieState extends Equatable {
         moviesList,
         moviesListSearched,
         errorType,
-        errorMessage,
       ];
 }

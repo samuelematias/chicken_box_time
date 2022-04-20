@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:chicken_box_time/utils/utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:movie_repository/movie_repository.dart';
 import 'package:movies_api/movies_api.dart';
@@ -27,14 +26,12 @@ class MovieCubit extends Cubit<MovieState> {
       emit(
         const MovieState.fetchFailure(
           errorType: ErrorType.defaultApiError,
-          errorMessage: defaultApiErrorMessage,
         ),
       );
     } on MoviesNotFoundFailure catch (_) {
       emit(
         const MovieState.fetchFailure(
           errorType: ErrorType.notFound,
-          errorMessage: notfoundErrorMessage,
         ),
       );
     } catch (e) {
