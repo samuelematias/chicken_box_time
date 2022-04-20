@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chicken_box_time/features/movie/cubit/movie_cubit.dart';
+import 'package:chicken_box_time/l10n/l10n.dart';
 import 'package:design_system/design_system.dart' as ds;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,6 +91,7 @@ class _MovieListState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final theme = ds.AppTheme.of(context);
     final colorTheme = theme.colors;
     if (state.isLoading) {
@@ -113,7 +115,7 @@ class _MovieListState extends StatelessWidget {
         minWidth: minWidth,
         minHeight: minHeight,
         child: ds.Text(
-          state.errorMessage,
+          l10n.defaultApiErrorMessage,
           key: const Key('default_api_error'),
           style: ds.CustomTextStyle.titleMedium,
           color: colorTheme.fontDanger,
@@ -124,7 +126,7 @@ class _MovieListState extends StatelessWidget {
         minWidth: minWidth,
         minHeight: minHeight,
         child: ds.Text(
-          state.errorMessage,
+          l10n.defaultErrorMessage,
           key: const Key('default_error'),
           style: ds.CustomTextStyle.titleMedium,
           color: colorTheme.fontDanger,
@@ -137,14 +139,14 @@ class _MovieListState extends StatelessWidget {
         child: Column(
           children: [
             ds.Text(
-              'Ops! Movie not found. Please, try another movie.',
+              l10n.notfoundErrorMessage,
               key: const Key('not_found'),
               style: ds.CustomTextStyle.titleMedium,
               color: colorTheme.fontWarning,
             ),
             const _VerticalDivider(),
             ds.Button(
-              title: 'Retry',
+              title: l10n.retryButtonMessage,
               onTap: () => context.read<MovieCubit>().getMovies(),
             ),
           ],
@@ -167,6 +169,7 @@ class _MovieList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final theme = ds.AppTheme.of(context);
     final colorTheme = theme.colors;
     return Column(
@@ -197,7 +200,7 @@ class _MovieList extends StatelessWidget {
               ? Column(
                   children: [
                     ds.Text(
-                      'Movie not found.',
+                      l10n.movieNotFoundBySearch,
                       key: const Key('movie_not_found_by_search'),
                       style: ds.CustomTextStyle.labelMedium,
                       color: colorTheme.fontWarning,
@@ -226,7 +229,7 @@ class _MovieList extends StatelessWidget {
               ),
               imageLeading: movie.posterPath!.getMovieThumbnail(),
               title: movie.title!,
-              subtitle: '${movie.popularity}',
+              subtitle: '${l10n.moviePopularity}: ${movie.popularity}',
             );
           },
           separatorBuilder: (_, __) => const _VerticalDivider(),
