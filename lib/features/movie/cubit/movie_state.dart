@@ -28,6 +28,7 @@ class MovieState extends Equatable {
     this.isSearchBarNotEmpty = false,
     this.typedContent = '',
     this.moviesList = const <MovieDetails>[],
+    this.moviesListSearched = const <MovieDetails>[],
     this.errorType = ErrorType.none,
     this.errorMessage = '',
   });
@@ -39,6 +40,7 @@ class MovieState extends Equatable {
           isSearchBarNotEmpty: false,
           typedContent: '',
           moviesList: const <MovieDetails>[],
+          moviesListSearched: const <MovieDetails>[],
           errorType: ErrorType.none,
           errorMessage: '',
         );
@@ -47,11 +49,13 @@ class MovieState extends Equatable {
   const MovieState.loading({
     String typedContent = '',
     List<MovieDetails> moviesList = const <MovieDetails>[],
+    List<MovieDetails> moviesListSearched = const <MovieDetails>[],
   }) : this(
           isLoading: true,
           isSearchBarNotEmpty: false,
           typedContent: typedContent,
           moviesList: moviesList,
+          moviesListSearched: moviesListSearched,
           errorType: ErrorType.none,
           errorMessage: '',
         );
@@ -60,6 +64,7 @@ class MovieState extends Equatable {
   const MovieState.fetchFailure({
     String typedContent = '',
     List<MovieDetails> moviesList = const <MovieDetails>[],
+    List<MovieDetails> moviesListSearched = const <MovieDetails>[],
     ErrorType errorType = ErrorType.defaultError,
     String errorMessage = defaultErrorMessage,
   }) : this(
@@ -67,6 +72,7 @@ class MovieState extends Equatable {
           isSearchBarNotEmpty: false,
           typedContent: typedContent,
           moviesList: moviesList,
+          moviesListSearched: moviesListSearched,
           errorType: errorType,
           errorMessage: errorMessage,
         );
@@ -75,11 +81,13 @@ class MovieState extends Equatable {
   const MovieState.fetchSuccess({
     String typedContent = '',
     required List<MovieDetails> moviesList,
+    List<MovieDetails> moviesListSearched = const <MovieDetails>[],
   }) : this(
           isLoading: false,
           isSearchBarNotEmpty: false,
           typedContent: typedContent,
           moviesList: moviesList,
+          moviesListSearched: moviesListSearched,
           errorType: ErrorType.none,
           errorMessage: '',
         );
@@ -89,6 +97,7 @@ class MovieState extends Equatable {
     String typedContent = '',
     bool isSearchBarNotEmpty = false,
     List<MovieDetails> moviesList = const <MovieDetails>[],
+    List<MovieDetails> moviesListSearched = const <MovieDetails>[],
     ErrorType errorType = ErrorType.defaultError,
     String errorMessage = 'Erro Message',
   }) : this(
@@ -96,6 +105,7 @@ class MovieState extends Equatable {
           isSearchBarNotEmpty: isSearchBarNotEmpty,
           typedContent: typedContent,
           moviesList: moviesList,
+          moviesListSearched: moviesListSearched,
           errorType: errorType,
           errorMessage: errorMessage,
         );
@@ -106,6 +116,7 @@ class MovieState extends Equatable {
     bool? isSearchBarNotEmpty,
     String? typedContent,
     List<MovieDetails>? moviesList,
+    List<MovieDetails>? moviesListSearched,
     ErrorType? errorType,
     String? errorMessage,
   }) {
@@ -114,6 +125,7 @@ class MovieState extends Equatable {
       isSearchBarNotEmpty: isSearchBarNotEmpty ?? this.isSearchBarNotEmpty,
       typedContent: typedContent ?? this.typedContent,
       moviesList: moviesList ?? this.moviesList,
+      moviesListSearched: moviesListSearched ?? this.moviesListSearched,
       errorType: errorType ?? this.errorType,
       errorMessage: errorMessage ?? this.errorMessage,
     );
@@ -135,6 +147,9 @@ class MovieState extends Equatable {
   /// The movie list that was received from the API response.
   final List<MovieDetails> moviesList;
 
+  /// The movies found by search.
+  final List<MovieDetails> moviesListSearched;
+
   /// If has some error in the process.
   final ErrorType errorType;
 
@@ -147,6 +162,7 @@ class MovieState extends Equatable {
         isSearchBarNotEmpty,
         typedContent,
         moviesList,
+        moviesListSearched,
         errorType,
         errorMessage,
       ];

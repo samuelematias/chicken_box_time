@@ -1,8 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chicken_box_time/features/movie/cubit/movie_cubit.dart';
 import 'package:design_system/design_system.dart' as ds;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:movie_repository/movie_repository.dart';
 import 'package:movies_api/movies_api.dart';
 
@@ -14,6 +15,9 @@ class MovieListPage extends StatelessWidget {
   const MovieListPage({
     Key? key,
   }) : super(key: key);
+
+  /// {@macro movie_list_page.route}
+  static const String route = '/';
 
   @override
   Widget build(BuildContext context) {
@@ -36,52 +40,31 @@ class _MovieListView extends StatelessWidget {
     final theme = ds.AppTheme.of(context);
     final colorTheme = theme.colors;
     final spacingTheme = theme.spacing;
-    final data = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-    return BlocBuilder<MovieCubit, MovieState>(
-      builder: (context, state) {
-        return Scaffold(
-          backgroundColor: colorTheme.background,
-          body: SafeArea(
-            top: false,
-            bottom: false,
-            child: SingleChildScrollView(
-              child: Center(
-                child: Padding(
-                  padding: EdgeInsets.all(spacingTheme.large),
-                  child: Column(
-                    children: [
-                      _MovieListState(state: state),
-                    ],
+    return Scaffold(
+      backgroundColor: colorTheme.background,
+      body: SafeArea(
+        top: false,
+        bottom: false,
+        child: GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: SingleChildScrollView(
+            child: BlocBuilder<MovieCubit, MovieState>(
+              builder: (context, state) {
+                return Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(spacingTheme.large),
+                    child: Column(
+                      children: [
+                        _MovieListState(state: state),
+                      ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
-          floatingActionButton: SpeedDial(
-            overlayOpacity: 0,
-            icon: Icons.interests_rounded,
-            backgroundColor: colorTheme.brand,
-            children: [
-              SpeedDialChild(
-                child: Icon(
-                  Icons.search,
-                  color: colorTheme.font,
-                ),
-                label: 'Search',
-                backgroundColor: colorTheme.brand,
-                onTap: () {
-                  showSearch<dynamic>(
-                    context: context,
-                    delegate: ds.SearchBar(
-                      data: data,
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
@@ -101,20 +84,56 @@ class _MovieListState extends StatelessWidget {
     if (state.isLoading) {
       return const _LoadingIndicator();
     } else if (state.moviesList.isNotEmpty) {
-      return ListView.separated(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: state.moviesList.length,
-        itemBuilder: (_, index) {
-          final movie = state.moviesList[index];
-          return ds.Card(
-            onTap: () {},
-            imageLeading: movie.posterPath!.getMovieThumbnail(),
-            title: movie.title!,
-            subtitle: '${movie.popularity}',
-          );
-        },
-        separatorBuilder: (_, __) => const _VerticalDivider(),
+      final moviesList = state.moviesListSearched.isEmpty
+          ? state.moviesList
+          : state.moviesListSearched;
+      return Column(
+        children: [
+          TextField(
+            onChanged: context.read<MovieCubit>().onChanged,
+            style: TextStyle(color: colorTheme.font),
+            decoration: InputDecoration(
+              prefixIconColor: colorTheme.brand,
+              suffixIconColor: colorTheme.brand,
+              filled: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide.none,
+              ),
+              iconColor: colorTheme.brand,
+              prefixIcon: Icon(
+                Icons.search,
+                color: colorTheme.brand,
+              ),
+              fillColor: colorTheme.background,
+            ),
+            cursorColor: colorTheme.brand,
+          ),
+          ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: moviesList.length,
+            itemBuilder: (_, index) {
+              final movie = moviesList[index];
+              return ds.Card(
+                onTap: () => showBarModalBottomSheet<dynamic>(
+                  expand: false,
+                  context: context,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) => _MovieDetails(
+                    imageUrl: movie.posterPath!.getMovieThumbnail(),
+                    title: movie.title!,
+                    description: movie.overview!,
+                  ),
+                ),
+                imageLeading: movie.posterPath!.getMovieThumbnail(),
+                title: movie.title!,
+                subtitle: '${movie.popularity}',
+              );
+            },
+            separatorBuilder: (_, __) => const _VerticalDivider(),
+          ),
+        ],
       );
     } else if (state.errorType == ErrorType.defaultApiError) {
       return ds.Text(
@@ -142,9 +161,57 @@ class _MovieListState extends StatelessWidget {
   }
 }
 
-/// Widget responsible for creating the spaces between the widgets
+class _MovieDetails extends StatelessWidget {
+  const _MovieDetails({
+    Key? key,
+    required this.imageUrl,
+    required this.title,
+    required this.description,
+  }) : super(key: key);
+
+  final String imageUrl;
+  final String title;
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = ds.AppTheme.of(context);
+    final colorTheme = theme.colors;
+    final spacingTheme = theme.spacing;
+    return SingleChildScrollView(
+      child: Container(
+        color: colorTheme.background,
+        padding: EdgeInsets.all(spacingTheme.large),
+        child: Column(
+          children: [
+            ds.Text(
+              title,
+              style: ds.CustomTextStyle.subtitleMedium,
+              color: colorTheme.font,
+            ),
+            const _VerticalDivider(),
+            CachedNetworkImage(
+              fadeInDuration: const Duration(milliseconds: 400),
+              fit: BoxFit.cover,
+              imageUrl: imageUrl,
+              width: 175,
+              placeholder: (context, url) => const Icon(Icons.image),
+              errorWidget: (context, url, dynamic error) =>
+                  const Icon(Icons.broken_image),
+            ),
+            const _VerticalDivider(),
+            ds.Text(
+              description,
+              style: ds.CustomTextStyle.labelSmall,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _VerticalDivider extends StatelessWidget {
-  /// Creates a new instance of [_VerticalDivider].
   const _VerticalDivider({
     Key? key,
     this.height,
@@ -160,9 +227,7 @@ class _VerticalDivider extends StatelessWidget {
   }
 }
 
-/// The widget responsible for creating the LoadingIndicator.
 class _LoadingIndicator extends StatelessWidget {
-  /// Creates a new instance of [_LoadingIndicator].
   const _LoadingIndicator({Key? key}) : super(key: key);
 
   @override

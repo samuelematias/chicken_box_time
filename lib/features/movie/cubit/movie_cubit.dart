@@ -43,4 +43,15 @@ class MovieCubit extends Cubit<MovieState> {
       );
     }
   }
+
+  /// On changed method to textfield.
+  /// Returning a filtered list of movies by what was typed.
+  void onChanged(String value) {
+    final list = state.moviesList
+        .where(
+          (e) => e.toString().toLowerCase().contains(value.toLowerCase()),
+        )
+        .toList();
+    emit(state.copyWith(moviesListSearched: list));
+  }
 }

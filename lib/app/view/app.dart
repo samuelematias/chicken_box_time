@@ -31,7 +31,7 @@ class App extends StatelessWidget {
         ),
       ),
       GoRoute(
-        path: '/',
+        path: MovieListPage.route,
         builder: (context, state) => const MovieListPage(),
       ),
     ],
