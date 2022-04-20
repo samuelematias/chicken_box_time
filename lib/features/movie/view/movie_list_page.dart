@@ -47,21 +47,29 @@ class _MovieListView extends StatelessWidget {
         bottom: false,
         child: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: SingleChildScrollView(
-            child: BlocBuilder<MovieCubit, MovieState>(
-              builder: (context, state) {
-                return Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(spacingTheme.large),
-                    child: Column(
-                      children: [
-                        _MovieListState(state: state),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                child: BlocBuilder<MovieCubit, MovieState>(
+                  builder: (context, state) {
+                    return Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(spacingTheme.large),
+                        child: Column(
+                          children: [
+                            _MovieListState(
+                              state: state,
+                              minWidth: constraints.maxWidth,
+                              minHeight: constraints.maxHeight,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
           ),
         ),
       ),
@@ -73,8 +81,11 @@ class _MovieListState extends StatelessWidget {
   const _MovieListState({
     Key? key,
     required this.state,
+    required this.minWidth,
+    required this.minHeight,
   }) : super(key: key);
-
+  final double minWidth;
+  final double minHeight;
   final MovieState state;
 
   @override
@@ -82,82 +93,146 @@ class _MovieListState extends StatelessWidget {
     final theme = ds.AppTheme.of(context);
     final colorTheme = theme.colors;
     if (state.isLoading) {
-      return const _LoadingIndicator();
+      return _CenterWidgetInsideSingleChildScrollView(
+        minWidth: minWidth,
+        minHeight: minHeight,
+        child: const _LoadingIndicator(),
+      );
     } else if (state.moviesList.isNotEmpty) {
       final moviesList = state.moviesListSearched.isEmpty
           ? state.moviesList
           : state.moviesListSearched;
-      return Column(
-        children: [
-          TextField(
-            onChanged: context.read<MovieCubit>().onChanged,
-            style: TextStyle(color: colorTheme.font),
-            decoration: InputDecoration(
-              prefixIconColor: colorTheme.brand,
-              suffixIconColor: colorTheme.brand,
-              filled: true,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide.none,
-              ),
-              iconColor: colorTheme.brand,
-              prefixIcon: Icon(
-                Icons.search,
-                color: colorTheme.brand,
-              ),
-              fillColor: colorTheme.background,
-            ),
-            cursorColor: colorTheme.brand,
-          ),
-          ListView.separated(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: moviesList.length,
-            itemBuilder: (_, index) {
-              final movie = moviesList[index];
-              return ds.Card(
-                onTap: () => showBarModalBottomSheet<dynamic>(
-                  expand: false,
-                  context: context,
-                  backgroundColor: Colors.transparent,
-                  builder: (context) => _MovieDetails(
-                    imageUrl: movie.posterPath!.getMovieThumbnail(),
-                    title: movie.title!,
-                    description: movie.overview!,
-                  ),
-                ),
-                imageLeading: movie.posterPath!.getMovieThumbnail(),
-                title: movie.title!,
-                subtitle: '${movie.popularity}',
-              );
-            },
-            separatorBuilder: (_, __) => const _VerticalDivider(),
-          ),
-        ],
+      final movieNotFoundBySearch =
+          state.isSearchBarNotEmpty && state.moviesListSearched.isEmpty;
+      return _MovieList(
+        movieNotFoundBySearch: movieNotFoundBySearch,
+        moviesList: moviesList,
       );
     } else if (state.errorType == ErrorType.defaultApiError) {
-      return ds.Text(
-        state.errorMessage,
-        key: const Key('default_api_error'),
-        style: ds.CustomTextStyle.titleMedium,
-        color: colorTheme.fontDanger,
+      return _CenterWidgetInsideSingleChildScrollView(
+        minWidth: minWidth,
+        minHeight: minHeight,
+        child: ds.Text(
+          state.errorMessage,
+          key: const Key('default_api_error'),
+          style: ds.CustomTextStyle.titleMedium,
+          color: colorTheme.fontDanger,
+        ),
       );
     } else if (state.errorType == ErrorType.defaultError) {
-      return ds.Text(
-        state.errorMessage,
-        key: const Key('default_api_error'),
-        style: ds.CustomTextStyle.titleMedium,
-        color: colorTheme.fontDanger,
+      return _CenterWidgetInsideSingleChildScrollView(
+        minWidth: minWidth,
+        minHeight: minHeight,
+        child: ds.Text(
+          state.errorMessage,
+          key: const Key('default_error'),
+          style: ds.CustomTextStyle.titleMedium,
+          color: colorTheme.fontDanger,
+        ),
       );
     } else if (state.errorType == ErrorType.notFound) {
-      return ds.Text(
-        state.errorMessage,
-        key: const Key('not_found'),
-        style: ds.CustomTextStyle.titleMedium,
-        color: colorTheme.fontWarning,
+      return _CenterWidgetInsideSingleChildScrollView(
+        minWidth: minWidth,
+        minHeight: minHeight,
+        child: Column(
+          children: [
+            ds.Text(
+              'Ops! Movie not found. Please, try another movie.',
+              key: const Key('not_found'),
+              style: ds.CustomTextStyle.titleMedium,
+              color: colorTheme.fontWarning,
+            ),
+            const _VerticalDivider(),
+            ds.Button(
+              title: 'Retry',
+              onTap: () => context.read<MovieCubit>().getMovies(),
+            ),
+          ],
+        ),
       );
     }
-    return Container();
+    return const SizedBox.shrink();
+  }
+}
+
+class _MovieList extends StatelessWidget {
+  const _MovieList({
+    Key? key,
+    required this.movieNotFoundBySearch,
+    required this.moviesList,
+  }) : super(key: key);
+
+  final bool movieNotFoundBySearch;
+  final List<MovieDetails> moviesList;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = ds.AppTheme.of(context);
+    final colorTheme = theme.colors;
+    return Column(
+      children: [
+        TextField(
+          onChanged: context.read<MovieCubit>().onChanged,
+          style: TextStyle(color: colorTheme.font),
+          decoration: InputDecoration(
+            prefixIconColor: colorTheme.brand,
+            suffixIconColor: colorTheme.brand,
+            filled: true,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide.none,
+            ),
+            iconColor: colorTheme.brand,
+            prefixIcon: Icon(
+              Icons.search,
+              color: colorTheme.brand,
+            ),
+            fillColor: colorTheme.background,
+          ),
+          cursorColor: colorTheme.brand,
+        ),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          child: movieNotFoundBySearch
+              ? Column(
+                  children: [
+                    ds.Text(
+                      'Movie not found.',
+                      key: const Key('movie_not_found_by_search'),
+                      style: ds.CustomTextStyle.labelMedium,
+                      color: colorTheme.fontWarning,
+                    ),
+                    const _VerticalDivider(),
+                  ],
+                )
+              : const SizedBox.shrink(),
+        ),
+        ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: moviesList.length,
+          itemBuilder: (_, index) {
+            final movie = moviesList[index];
+            return ds.Card(
+              onTap: () => showBarModalBottomSheet<dynamic>(
+                expand: false,
+                context: context,
+                backgroundColor: Colors.transparent,
+                builder: (context) => _MovieDetails(
+                  imageUrl: movie.posterPath!.getMovieThumbnail(),
+                  title: movie.title!,
+                  description: movie.overview!,
+                ),
+              ),
+              imageLeading: movie.posterPath!.getMovieThumbnail(),
+              title: movie.title!,
+              subtitle: '${movie.popularity}',
+            );
+          },
+          separatorBuilder: (_, __) => const _VerticalDivider(),
+        ),
+      ],
+    );
   }
 }
 
@@ -195,9 +270,14 @@ class _MovieDetails extends StatelessWidget {
               fit: BoxFit.cover,
               imageUrl: imageUrl,
               width: 175,
-              placeholder: (context, url) => const Icon(Icons.image),
-              errorWidget: (context, url, dynamic error) =>
-                  const Icon(Icons.broken_image),
+              placeholder: (context, url) => Icon(
+                Icons.image,
+                color: colorTheme.font,
+              ),
+              errorWidget: (context, url, dynamic error) => Icon(
+                Icons.broken_image,
+                color: colorTheme.font,
+              ),
             ),
             const _VerticalDivider(),
             ds.Text(
@@ -236,6 +316,29 @@ class _LoadingIndicator extends StatelessWidget {
     final colorTheme = theme.colors;
     return CircularProgressIndicator(
       valueColor: AlwaysStoppedAnimation<Color>(colorTheme.brand),
+    );
+  }
+}
+
+class _CenterWidgetInsideSingleChildScrollView extends StatelessWidget {
+  const _CenterWidgetInsideSingleChildScrollView({
+    Key? key,
+    required this.minWidth,
+    required this.minHeight,
+    required this.child,
+  }) : super(key: key);
+
+  final double minWidth;
+  final double minHeight;
+  final Widget child;
+  @override
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        minWidth: minWidth,
+        minHeight: minHeight,
+      ),
+      child: Center(child: child),
     );
   }
 }

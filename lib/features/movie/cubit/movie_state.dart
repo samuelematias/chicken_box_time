@@ -92,24 +92,6 @@ class MovieState extends Equatable {
           errorMessage: '',
         );
 
-  /// The content typed in the TextField state of [MovieState].
-  const MovieState.typedContent({
-    String typedContent = '',
-    bool isSearchBarNotEmpty = false,
-    List<MovieDetails> moviesList = const <MovieDetails>[],
-    List<MovieDetails> moviesListSearched = const <MovieDetails>[],
-    ErrorType errorType = ErrorType.defaultError,
-    String errorMessage = 'Erro Message',
-  }) : this(
-          isLoading: false,
-          isSearchBarNotEmpty: isSearchBarNotEmpty,
-          typedContent: typedContent,
-          moviesList: moviesList,
-          moviesListSearched: moviesListSearched,
-          errorType: errorType,
-          errorMessage: errorMessage,
-        );
-
   /// copyWith method for the [MovieState].
   MovieState copyWith({
     bool? isLoading,

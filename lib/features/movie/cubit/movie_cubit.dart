@@ -52,6 +52,12 @@ class MovieCubit extends Cubit<MovieState> {
           (e) => e.toString().toLowerCase().contains(value.toLowerCase()),
         )
         .toList();
-    emit(state.copyWith(moviesListSearched: list));
+    emit(
+      state.copyWith(
+        moviesListSearched: list,
+        isSearchBarNotEmpty: value.isNotEmpty,
+        typedContent: value,
+      ),
+    );
   }
 }

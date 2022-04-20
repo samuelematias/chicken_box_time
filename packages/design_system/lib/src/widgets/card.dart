@@ -99,14 +99,20 @@ class _ImageLeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ds.AppTheme.of(context);
     return CachedNetworkImage(
       fadeInDuration: const Duration(milliseconds: 400),
       fit: BoxFit.cover,
       imageUrl: imageUrl,
       width: 175,
-      placeholder: (context, url) => const Icon(Icons.image),
-      errorWidget: (context, url, dynamic error) =>
-          const Icon(Icons.broken_image),
+      placeholder: (context, url) => Icon(
+        Icons.image,
+        color: theme.colors.font,
+      ),
+      errorWidget: (context, url, dynamic error) => Icon(
+        Icons.broken_image,
+        color: theme.colors.font,
+      ),
     );
   }
 }
