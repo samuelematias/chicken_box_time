@@ -1,4 +1,3 @@
-import 'package:chicken_box_time/features/home/home.dart';
 import 'package:chicken_box_time/features/movie/movie.dart';
 import 'package:chicken_box_time/flavor/flavor.dart';
 import 'package:chicken_box_time/l10n/l10n.dart';
@@ -24,12 +23,6 @@ class App extends StatelessWidget {
   /// Create the [App] routers.
   final _router = GoRouter(
     routes: [
-      GoRoute(
-        path: '/home',
-        builder: (context, state) => const MyHomePage(
-          title: 'Flutter Demo Home Page',
-        ),
-      ),
       GoRoute(
         path: MovieListPage.route,
         builder: (context, state) => const MovieListPage(),
