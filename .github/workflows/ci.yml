@@ -16,7 +16,7 @@ jobs:
         with:
           flutter-version: '2.10.4'
 
-      - name: Install all packages to install dependencies
+      - name: Get all packages to install dependencies
         run: bash ./flutter_packages.sh
 
       - name: Generate .g files in all packages

@@ -69,7 +69,8 @@ void main() {
       );
 
       blocTest<MovieCubit, MovieState>(
-        'should emits [loading, failure] when movieRepository throws (defaultError)',
+        'should emits [loading, failure] when movieRepository '
+        'throws (defaultError)',
         build: () {
           when(
             () => movieRepository.getMovies(),
