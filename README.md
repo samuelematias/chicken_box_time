@@ -42,9 +42,9 @@ git clone https://github.com/samuelematias/chicken_box_time.git
 2. With the repository cloned, open the repository root in your terminal and run the command:
 
 ```bash
-flutter pub get
+bash ./flutter_packages.sh
 ```
-With FVM:
+With FVM (In project root, and into each package, run this command):
 
 ```bash
 fvm flutter pub get
@@ -52,12 +52,12 @@ fvm flutter pub get
 3. Everything working fine, without any errors, run the app with the following command:
 
 ```bash
-flutter run
+flutter run --flavor development -t lib/main_development.dart
 ```
 With FVM:
 
 ```bash
-fvm flutter run
+fvm flutter run --flavor development -t lib/main_development.dart
 ```
 
 4. Have fun!
