@@ -1,3 +1,4 @@
+# checks if any code changes have occurred in CI.
 if [[ -z $(git status --porcelain) ]];
 then
     echo "Its is clean"

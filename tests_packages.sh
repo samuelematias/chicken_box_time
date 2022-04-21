@@ -1,4 +1,4 @@
-# This script is used in CI/CD to test all packages
+# This script is used in CI/CD to test all packages.
 BLUE="\e[36;1m%s\e[0m\n"
 GREEN="\e[32;1m%s\e[0m\n"
 YELLOW="\e[33;1m%s\e[0m\n"
