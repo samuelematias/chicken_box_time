@@ -1,8 +1,8 @@
 {
     "@@locale": "en",
-    "welcomeToChickenBox": "Welcome to Chicken Box",
+    "welcomeToChickenBox": "Welcome to Chicken Box Time",
     "@welcomeToChickenBox": {
-        "description": "Welcome to the Chicken Box app!"
+        "description": "Welcome to the Chicken Box Time app!"
     },
     "logIn": "Log in",
     "@logIn": {
