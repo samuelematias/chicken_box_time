@@ -17,9 +17,6 @@ class MovieListPage extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  /// {@macro movie_list_page.route}
-  static const String route = '/';
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
