@@ -1,4 +1,5 @@
 import 'package:chicken_box_time/features/movie/movie.dart';
+import 'package:chicken_box_time/features/welcome/welcome.dart';
 import 'package:chicken_box_time/flavor/flavor.dart';
 import 'package:chicken_box_time/l10n/l10n.dart';
 import 'package:design_system/design_system.dart';
@@ -24,7 +25,11 @@ class App extends StatelessWidget {
   final _router = GoRouter(
     routes: [
       GoRoute(
-        path: MovieListPage.route,
+        path: '/',
+        builder: (context, state) => const WelcomePage(),
+      ),
+      GoRoute(
+        path: '/movie',
         builder: (context, state) => const MovieListPage(),
       ),
     ],
