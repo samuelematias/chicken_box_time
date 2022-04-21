@@ -1,5 +1,13 @@
 {
     "@@locale": "pt",
+    "welcomeToChickenBox": "Bem vinda(o) ao Chicken Box",
+    "@welcomeToChickenBox": {
+        "description": "Bem vinda(o) ao app Chicken Box!"
+    },
+    "logIn": "Log In",
+    "@logIn": {
+        "description": "Acessar a pagina de Log In."
+    },
    "defaultErrorMessage": "Algo está errado! Por favor, tente novamente mais tarde.",
     "@defaultErrorMessage": {
         "description": "Mensagem de erro padrão usada no aplicativo."
