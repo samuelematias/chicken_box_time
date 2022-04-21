@@ -288,15 +288,14 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
 
 - [ ] Design System - Tests
 - [ ] Movie API - Tests
-- [ ] Movie API - Tests
-- [ ] Movie API - More Tests
-- [ ] Manually change theme/mode (take default by system)
+- [ ] Movie Repository - Tests
+- [ ] Movie Feature - More Tests
 - [ ] Local Storage - Implementation
 - [ ] Local Storage - Tests
+- [ ] Manually change theme/mode (take default by system)
 - [ ] Manually change language
-- [ ] Manually change language?
 - [ ] Settings page (change theme/language)
-- [ ] Infinite scroll
+- [ ] Infinite scroll - movie_list_page
 - [ ] Accessibility
 
 ---
