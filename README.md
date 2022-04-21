@@ -44,7 +44,7 @@ git clone https://github.com/samuelematias/chicken_box_time.git
 ```bash
 bash ./flutter_packages.sh
 ```
-With FVM (Go into each package and run this command):
+With FVM (In project root, and into each package, run this command):
 
 ```bash
 fvm flutter pub get
