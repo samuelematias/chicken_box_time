@@ -3,6 +3,7 @@ import 'package:chicken_box_time/utils/utils.dart';
 import 'package:design_system/design_system.dart' as ds;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 
 /// {@template welcome_page}
 /// The page responsabilite to render the list of movies.
@@ -48,20 +49,26 @@ class _WelcomeView extends StatelessWidget {
                       child: Column(
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: context.gridColumns5,
+                                width: 150,
                                 child: ds.Text(
                                   l10n.welcomeToChickenBox,
                                   key: const Key('welcome_chicken_box'),
                                   style: ds.CustomTextStyle.titleSmall,
                                 ),
                               ),
+                              SizedBox(width: spacingTheme.xl),
+                              SizedBox(
+                                width: 150,
+                                child: Lottie.asset(chickenBoxLottie),
+                              ),
                             ],
                           ),
                           SizedBox(height: spacingTheme.medium),
                           SizedBox(
-                            width: context.gridColumns11,
+                            width: 150,
                             child: ds.Button(
                               mainAxisSize: MainAxisSize.max,
                               title: l10n.logIn,
