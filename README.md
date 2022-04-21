@@ -24,6 +24,8 @@ Internationalization (i10n)            | Dark/Light mode             | And more!
 :-------------------------:|:-------------------------:|:-------------------------:
 <img src="docs/assets/chicken-box-time-l10n.gif" alt="show_case"  height="500">   | <img src="docs/assets/chicken-box-time-dark-light-mode.gif" alt="show_case"  height="500"> | <img src="docs/assets/chicken-box-time-and-more.gif" alt="show_case"  height="500"> 
 
+> 💡 The Search feature considers both **title** and **description** of the movie.
+
 This project has a simple CI pipeline, to analyze the code and run the unit and widget tests.
 <br/>
 For more information, check the [ci.yaml](https://github.com/samuelematias/chicken_box_time/blob/main/.github/workflows/ci.yml) file, which has the whole process in detail, step by step.
@@ -67,6 +69,10 @@ fvm flutter run
 - [x] Android
 - [x] iOS
 - [ ] macOS - **Soon**!
+
+Flavor Development             | Flavor Staging             | Flavor Production             |
+:-------------------------:|:-------------------------:|:-------------------------:
+![CleanShot 2022-04-14 at 10 40 12](https://user-images.githubusercontent.com/5155386/163403225-a5b2c266-acd3-4cdd-91d0-008e54be9ba7.png) | ![CleanShot 2022-04-14 at 10 40 00](https://user-images.githubusercontent.com/5155386/163403261-b673a35f-6794-43be-bef9-86d904503c1d.png) | ![CleanShot 2022-04-14 at 10 40 21](https://user-images.githubusercontent.com/5155386/163403289-765585e4-25c2-4513-adc5-ee3395775399.png)
 
 ### For building `development` environment :
 
