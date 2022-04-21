@@ -68,6 +68,8 @@ fvm flutter run
 
 - [x] Android
 - [x] iOS
+- [x] Linux
+- [x] [Hover][hover]
 - [ ] macOS - **Soon**!
 
 Flavor Development             | Flavor Staging             | Flavor Production             |
